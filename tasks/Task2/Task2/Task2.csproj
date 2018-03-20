@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="C:\Users\cleme\oom\tasks\Task3\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
 </Project>

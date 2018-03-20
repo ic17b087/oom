@@ -3,20 +3,22 @@
 namespace Task2
 {
 
+    public enum Power
+    {
+        ON,
+        OFF
+    };
+
     interface Device
     {
         void togglePower();
+        Power getStatus();
     }
 
     public class Camera : Device
     {
-        enum Power
-        {
-            ON,
-            OFF
-        };
 
-        Power pow = Power.OFF;
+        private Power pow = Power.OFF;
 
         private int ISO;
         private double aperture;
@@ -122,21 +124,15 @@ namespace Task2
             }
         }
 
-        Power getStatus()
+        public Power getStatus()
         {
             return pow;
         }
     }
 
-    class Computer : Device
-    {
-        enum Power
-        {
-            ON,
-            OFF
-        }
+    class Computer : Device {
 
-        Power pow = Power.OFF;
+        private Power pow = Power.OFF;
 
         public void togglePower()
         {
@@ -148,6 +144,11 @@ namespace Task2
             {
                 pow = Power.ON;
             }
+        }
+
+        public Power getStatus()
+        {
+            return pow;
         }
     }
 
@@ -165,8 +166,6 @@ namespace Task2
 
             Computer com1 = new Computer();
 
-            com1.togglePower();
-
             Device[] devArr = { cam1, com1 };
 
             Console.WriteLine(cam1.getISO());
@@ -176,6 +175,15 @@ namespace Task2
             Console.WriteLine(cam1.setISO(200));
             Console.WriteLine(cam1.setAperture(4));
             Console.WriteLine(cam1.setSSpeed(60));
+
+            cam1.togglePower();
+
+            foreach(Device d in devArr) 
+            {
+                Console.WriteLine("OFF=" + d.getStatus());
+                d.togglePower();
+                Console.WriteLine("ON=" + d.getStatus());
+            }
 
         }
     }
